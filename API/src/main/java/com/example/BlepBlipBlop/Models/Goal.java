@@ -1,15 +1,24 @@
 package com.example.BlepBlipBlop.Models;
 import java.util.Date;
 public class Goal {
+    private int id;
     private String title;
     private Date dueDate;
     private String description;
     private byte priority;
-    public Goal (String title, Date dueDate, String description, byte priority) {
+    private byte level;
+    public Goal (int id, String title, Date dueDate, String description, byte priority, byte level) {
+        setId(id);
         setTitle(title);
         setDueDate(dueDate);
         setDescription(description);
         setPriority(priority);
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
     public String getTitle() {
         return title;
@@ -34,5 +43,11 @@ public class Goal {
     }
     public void setPriority(byte priority) {
         this.priority = priority;
+    }
+    public byte getLevel() {
+        return level;
+    }
+    public void setLevel(byte level) {
+        this.level = level;
     }
 }
