@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Database {
 
@@ -11,7 +12,7 @@ public class Database {
     private static String dbUser = "root";
     private static String dbPass = "test";
 
-    public static void add(Goal goal) {
+    public static void addGoal(Goal goal) {
         String tempSQLtxt = "TBA";
 
         try {
@@ -29,7 +30,7 @@ public class Database {
             }
     }
 
-    public static void getById(int id) {
+    public static Goal getGoalById(int id) {
         String tempSQLtxt = "TBA";
 
         try {
@@ -45,9 +46,11 @@ public class Database {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            return null;
     }
 
-    public static void getAll(int id, byte level) {
+    public static ArrayList<Goal> getAllGoals(int id, byte level) {
         String tempSQLtxt = "TBA";
 
         try {
@@ -79,9 +82,29 @@ public class Database {
                 break;
 
         }
+        return null;
     }
 
-    public static void update(Goal goal) {
+    public static Goal updateGoal(Goal goal) {
+        String tempSQLtxt = "TBA";
+
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+    }
+
+    public static void deleteGoal(int id) {
         String tempSQLtxt = "TBA";
 
         try {
@@ -99,7 +122,97 @@ public class Database {
             }
     }
 
-    public static void delete(int id) {
+    public static void addUser(User user) {
+        String tempSQLtxt = "TBA";
+
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+
+    public static User getById(int id) {
+        String tempSQLtxt = "TBA";
+
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+    }
+
+    public static ArrayList<User> getAllUsers(int id, byte level) {
+        String tempSQLtxt = "TBA";
+
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        switch (level) {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+
+        }
+        return null;
+    }
+
+    public static void updateUser(Goal goal) {
+        String tempSQLtxt = "TBA";
+
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+
+    public static void deleteUser(int id) {
         String tempSQLtxt = "TBA";
 
         try {
