@@ -1,30 +1,29 @@
 package com.example.BlepBlipBlop.Controllers;
+import com.example.BlepBlipBlop.Models.Database;
 import com.example.BlepBlipBlop.Models.Goal;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 @RestController
 @RequestMapping("/goal")
 public class GoalRestController {
-    @RequestMapping(path="", method=RequestMethod.GET)
-    public ArrayList<Goal> getAll() {
-        ArrayList<Goal> goals = new ArrayList<>();
-        return goals;
+    @RequestMapping(path="/{username}/{password}", method=RequestMethod.GET)
+    public ArrayList<Goal> getGoals(@PathVariable String username, @PathVariable String password) {
+        // Get user level
+        // Get goal tables at and below level
+        return null;
     }
     @RequestMapping(path="", method=RequestMethod.POST)
-    public String createGoal(@RequestAttribute Goal goal) {
-        if (findById(goal.getId()) != null) return "ID Conflict";
-        return "";
+    public void createGoal(@RequestAttribute Goal goal) {
+        if (Database.getById(goal.getId()) == null) {
+            Database.add(goal);
+        }
     }
     @RequestMapping(path="", method=RequestMethod.PUT)
     public Goal updateGoal(@RequestAttribute Goal goal) {
-        return null;
+        return Database.update(goal);
     }
     @RequestMapping(path="/{id}", method=RequestMethod.DELETE)
-    public String deleteGoal(@PathVariable int id) {
-        return "";
-    }
-    private Goal findById(int id) {
-        Goal goal = null;
-        return goal;
+    public void deleteGoal(@PathVariable int id) {
+        Database.delete(id);
     }
 }

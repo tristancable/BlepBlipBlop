@@ -13,6 +13,7 @@ public class Goal {
         setDueDate(dueDate);
         setDescription(description);
         setPriority(priority);
+        setLevel(level);
     }
     public int getId() {
         return id;
