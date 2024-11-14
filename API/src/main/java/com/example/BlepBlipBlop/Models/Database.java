@@ -1,16 +1,69 @@
 package com.example.BlepBlipBlop.Models;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class Database {
 
-    public static void add(Goal goal) {
+    private static String dbURL = "jdbc:mysql://localhost:3306/fantasy_world?createDatabaseIfNotExist=TRUE&allowPublicKeyRetrieval=TRUE&useSSL=FALSE";
+    private static String dbUser = "root";
+    private static String dbPass = "test";
 
+    public static void add(Goal goal) {
+        String tempSQLtxt = "TBA";
+
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     public static void getById(int id) {
+        String tempSQLtxt = "TBA";
 
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     public static void getAll(int id, byte level) {
+        String tempSQLtxt = "TBA";
+
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         switch (level) {
             case 1:
 
@@ -29,10 +82,38 @@ public class Database {
     }
 
     public static void update(Goal goal) {
+        String tempSQLtxt = "TBA";
 
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     public static void delete(int id) {
+        String tempSQLtxt = "TBA";
 
+        try {
+            Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(tempSQLtxt);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("affected Rows: " + affectedRows);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 }
