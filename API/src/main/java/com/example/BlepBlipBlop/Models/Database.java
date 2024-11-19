@@ -50,7 +50,7 @@ public class Database {
             return null;
     }
 
-    public static ArrayList<Goal> getAllGoals(int id, byte level) {
+    public static ArrayList<Goal> getAllGoals(byte level) {
         String tempSQLtxt = "TBA";
 
         try {
@@ -140,7 +140,7 @@ public class Database {
             }
     }
 
-    public static User getById(int id) {
+    public static User getUserByUsernameAndPassword(String username, String password) {
         String tempSQLtxt = "TBA";
 
         try {
