@@ -1,24 +1,20 @@
-<template>
-  <div id="app">
-    <HomePage />
-  </div>
-</template>
-
 <script>
-import HomePage from './components/HomePage.vue';  // Ensure the import path is correct
+import Navbar from '@/components/NavBar.vue'
+
 export default {
+  name: 'App',
   components: {
-    HomePage  // Use the correct component name
+    Navbar
   }
-}
+};
 </script>
 
-
-
-
-
-
-
+<template>
+  <v-app>
+    <Navbar />
+    <router-view></router-view>
+  </v-app>
+</template>
 
 
 
@@ -30,28 +26,29 @@ export default {
 
 
 <!-- <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-app-bar app>
+      <v-toolbar-title>Blep Blip Blop</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text>Home</v-btn>
+      <v-btn text to="/calendar">Calendar</v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <h1>Welcome to the Home Page!</h1>
+        <p>This is your main content.</p>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* You can customize the style of the app bar here */
 </style> -->

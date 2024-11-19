@@ -1,20 +1,17 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'  // Import the router
+import router from './router'
+import vuetify from './plugins/vuetify'
+import { loadFonts } from './plugins/webfontloader'
 
-createApp(App)
-  .use(router)  // Use the router
-  .mount('#app')
+loadFonts()
 
+const app = createApp(App);
+app.use(router);
+app.use(vuetify);
 
+router.afterEach((to) => {
+    document.title = to.meta.title || "Blep Blip Blop";
+});
 
-
-
-
-
-
-
-// import { createApp } from 'vue'
-// import App from './App.vue'
-
-// createApp(App).mount('#app')
+app.mount('#app');
