@@ -1,18 +1,20 @@
 <template>
-  <div class="calendar">
-    <div class="calendar-header">
-      <button @click="prevMonth">Previous</button>
-      <h2>{{ monthName }} {{ year }}</h2>
-      <button @click="nextMonth">Next</button>
-    </div>
-    <div class="calendar-grid">
-      <div class="calendar-day" v-for="day in daysOfWeek" :key="day">{{ day }}</div>
-      <div v-for="day in validMonthDays" :key="day.date ? day.date.getTime() : day.day" class="calendar-date"
-        :class="{ 'today': isToday(day.date) }" @click="selectDate(day)">
-        {{ day.day }}
+  <v-app>
+    <div class="calendar">
+      <div class="calendar-header">
+        <button @click="prevMonth">Previous</button>
+        <h2>{{ monthName }} {{ year }}</h2>
+        <button @click="nextMonth">Next</button>
+      </div>
+      <div class="calendar-grid">
+        <div class="calendar-day" v-for="day in daysOfWeek" :key="day">{{ day }}</div>
+        <div v-for="day in validMonthDays" :key="day.date ? day.date.getTime() : day.day" class="calendar-date"
+          :class="{ 'today': isToday(day.date) }" @click="selectDate(day)">
+          {{ day.day }}
+        </div>
       </div>
     </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -90,16 +92,29 @@ export default {
 </script>
 
 <style scoped>
+/* Ensure the calendar takes up the entire screen */
+html, body, #app {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
 .calendar {
-  width: 300px;
-  margin: auto;
-  text-align: center;
+  height: 100%; /* Take full screen height */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure the header is spaced correctly */
+  align-items: center;
+  padding: 10%;
 }
 
 .calendar-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
-  align-items: center;
+  justify-items: center;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -107,6 +122,9 @@ export default {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
+  flex-grow: 1; /* Allow grid to take up available space */
+  justify-items: center;
+  width: 100%;
 }
 
 .calendar-day {
@@ -114,9 +132,14 @@ export default {
 }
 
 .calendar-date {
-  padding: 10px;
+  padding: 15px;
   cursor: pointer;
   border-radius: 5px;
+  width: 40px; /* Fixed width for each day */
+  height: 40px; /* Fixed height for each day */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .calendar-date.today {
