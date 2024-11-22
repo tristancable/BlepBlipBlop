@@ -34,7 +34,7 @@ public class Goal implements Serializable{
     @Column(nullable = false)
     private byte level;
 
-    //default constructor?
+    public Goal(){}
     
     public Goal (String title, Date dueDate, String description, byte priority, byte level) {
         setTitle(title);
