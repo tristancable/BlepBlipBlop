@@ -1,4 +1,5 @@
 package com.example.BlepBlipBlop.Models;
+<<<<<<< HEAD
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "User")
+=======
+>>>>>>> 7a25105b4a3d772c625c53903da8a4fca5f38ec1
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,33 +25,27 @@ public class User {
 
     @Column(nullable = false)
     private byte level;
-    
     public User(String username, String password, byte level) {
         setUsername(username);
         setPassword(password);
         setLevel(level);
     }
-
     public String getUsername() {
         return username;
     }
     private void setUsername(String username) {
         this.username = username;
     }
-
     public String getPassword() {
         return password;
     }
     private void setPassword(String password) {
         this.password = password;
     }
-
     public byte getLevel() {
         return level;
     }
     private void setLevel(byte level) {
         this.level = level;
     }
-
-    
 }

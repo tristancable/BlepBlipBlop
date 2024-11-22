@@ -7,6 +7,12 @@
 
 <script>
 export default {
-  name: 'HomePage'  // Ensure this is 'HomePage' (multi-word name)
+  name: 'HomePage'
 }
 </script>
+
+<style scoped>
+div {
+  padding: 10%;
+}
+</style>
