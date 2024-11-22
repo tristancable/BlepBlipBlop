@@ -107,6 +107,8 @@
   </template> -->
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "RegisterPage",
     data() {
@@ -118,8 +120,8 @@ export default {
         };
     },
     methods: {
-        register() {
-            console.log("Current Username before validation:", this.username);
+        async register() {
+            // console.log("Current Username before validation:", this.username);
 
             if (!this.username || this.username.trim() === "") {
                 this.errorMessage = "Please input a username.";
@@ -128,15 +130,32 @@ export default {
 
             if (this.password === this.confirmPassword) {
                 this.errorMessage = "";
-                console.log("User successfully validated:", this.username);
-                this.registerUser();
-                this.$refs.form.reset();
+                try {
+                    await this.registerUser();
+                    this.$refs.form.reset();
+                    console.log("User successfully validated:", this.username);
+                } catch (error) {
+                    console.error(error);
+                    this.errorMessage = "An error occured. Please try again.";
+                }
             } else {
                 this.errorMessage = "Passwords do not match.";
             }
         },
         registerUser() {
-            console.log("User registered:", this.username);
+            try {
+                console.log("Registering user:", this.username);
+                const response = await axios.post('http://localhost:8080/api/user', {
+                    username: this.username,
+                    password: this.password
+                });
+
+                console.log("Registration successful:", response.data);
+                alert("Registration successful! Please log in.");
+            } catch (error) {
+                console.error("Error during registration:", error.response || error);
+                this.errorMessage = error.response?.data?.message || "Registration failed. Please try again.";
+            }
         },
     },
 };
