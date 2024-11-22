@@ -194,7 +194,7 @@ public class Database {
         return null;
     }
 
-    public static void updateUser(Goal goal) {
+    public static void updateUser(User user) {
         String tempSQLtxt = "TBA";
 
         try {

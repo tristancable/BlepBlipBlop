@@ -14,4 +14,12 @@ public class UserRestController {
     public void createUser(@RequestBody User user) {
         Database.addUser(user);
     }
+    @RequestMapping(path="/", method=RequestMethod.PUT)
+    public void updateUser(@RequestBody User user) {
+        Database.updateUser(user);
+    }
+    @RequestMapping(path="/{id}", method=RequestMethod.DELETE)
+    public void deleteUser(@PathVariable int id) {
+        Database.deleteUser(id);
+    }
 }
