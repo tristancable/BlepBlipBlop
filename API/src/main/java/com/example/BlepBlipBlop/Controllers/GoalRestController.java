@@ -15,13 +15,13 @@ public class GoalRestController {
         return goals;
     }
     @RequestMapping(path="", method=RequestMethod.POST)
-    public void createGoal(@RequestAttribute Goal goal) {
+    public void createGoal(@RequestBody Goal goal) {
         if (Database.getGoalById(goal.getId()) == null) {
             Database.addGoal(goal);
         }
     }
     @RequestMapping(path="", method=RequestMethod.PUT)
-    public Goal updateGoal(@RequestAttribute Goal goal) {
+    public Goal updateGoal(@RequestBody Goal goal) {
         return Database.updateGoal(goal);
     }
     @RequestMapping(path="/{id}", method=RequestMethod.DELETE)

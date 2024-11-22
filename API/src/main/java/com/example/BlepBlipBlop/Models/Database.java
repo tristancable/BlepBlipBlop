@@ -159,7 +159,7 @@ public class Database {
             return null;
     }
 
-    public static ArrayList<User> getAllUsers(int id, byte level) {
+    public static ArrayList<User> getAllUsers() {
         String tempSQLtxt = "TBA";
 
         try {
