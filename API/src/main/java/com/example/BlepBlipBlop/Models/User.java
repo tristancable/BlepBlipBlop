@@ -1,7 +1,29 @@
 package com.example.BlepBlipBlop.Models;
+<<<<<<< HEAD
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "User")
+=======
+>>>>>>> 7a25105b4a3d772c625c53903da8a4fca5f38ec1
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private byte level;
     public User(String username, String password, byte level) {
         setUsername(username);

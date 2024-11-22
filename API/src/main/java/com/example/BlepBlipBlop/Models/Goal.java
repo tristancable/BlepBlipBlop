@@ -1,14 +1,42 @@
 package com.example.BlepBlipBlop.Models;
+import java.io.Serializable;
 import java.util.Date;
-public class Goal {
+
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Goal")
+public class Goal implements Serializable{
+
+    @Id
+    @Column(name = "goalId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(nullable = false)
     private String title;
+    
+    @Column(nullable = false)
     private Date dueDate;
+
+    @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
     private byte priority;
+
+    @Column(nullable = false)
     private byte level;
-    public Goal (int id, String title, Date dueDate, String description, byte priority, byte level) {
-        setId(id);
+
+    //default constructor?
+    
+    public Goal (String title, Date dueDate, String description, byte priority, byte level) {
         setTitle(title);
         setDueDate(dueDate);
         setDescription(description);
@@ -18,37 +46,35 @@ public class Goal {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public String getTitle() {
         return title;
     }
-    public void setTitle(String title) {
+    private void setTitle(String title) {
         this.title = title;
     }
     public Date getDate() {
         return dueDate;
     }
-    public void setDueDate(Date dueDate) {
+    private void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
     public String getDescription() {
         return description;
     }
-    public void setDescription(String description) {
+    private void setDescription(String description) {
         this.description = description;
     }
     public byte getPriority() {
         return priority;
     }
-    public void setPriority(byte priority) {
+    private void setPriority(byte priority) {
         this.priority = priority;
     }
     public byte getLevel() {
         return level;
     }
-    public void setLevel(byte level) {
+    private void setLevel(byte level) {
         this.level = level;
     }
 }

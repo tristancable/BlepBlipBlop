@@ -147,13 +147,13 @@ export default {
 
 <style scoped>
 .v-container {
-    height: 100vh;
+    height: 90vh;
     padding: 0;
-    overflow: hidden;
 }
 
 .v-card {
     width: 100%;
+    padding: 20px;
 }
 
 .red--text {

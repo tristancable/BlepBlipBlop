@@ -11,12 +11,38 @@ export default {
 
 <template>
   <v-app>
-    <Navbar />
-    <router-view></router-view>
+    <v-main>
+      <Navbar />
+      <router-view></router-view>
+    </v-main>
   </v-app>
 </template>
 
+<style scoped>
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
 
+.v-application {
+  height: 100%;
+}
+
+.v-main {
+  height: 100%;
+  /* Ensure v-main takes full height */
+  padding: 0;
+  margin: 0;
+}
+
+.v-container {
+  height: 100%;
+  padding: 0;
+}
+</style>
 
 
 
