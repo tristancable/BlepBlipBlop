@@ -1,2 +1,9 @@
-com\example\BlepBlipBlop\BlepBlipBlopApplication.class
+com\example\BlepBlipBlop\Models\User.class
+com\example\BlepBlipBlop\Controllers\GoalRestController.class
+com\example\BlepBlipBlop\Controllers\UserRestController.class
+com\example\BlepBlipBlop\Models\GoalJpaRepository.class
 com\example\BlepBlipBlop\ServletInitializer.class
+com\example\BlepBlipBlop\Models\UserJpaRepository.class
+com\example\BlepBlipBlop\BlepBlipBlopApplication.class
+com\example\BlepBlipBlop\Models\Goal.class
+com\example\BlepBlipBlop\BlepBlipBlopApplication$1.class

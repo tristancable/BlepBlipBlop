@@ -23,10 +23,10 @@ public class Goal implements Serializable{
     private String title;
     
     @Column(nullable = false)
-    private Date dueDate;
-
-    @Column(nullable = false)
     private String description;
+    
+    @Column(nullable = false)
+    private Date dueDate;
 
     @Column(nullable = false)
     private byte priority;
@@ -36,10 +36,10 @@ public class Goal implements Serializable{
 
     public Goal(){}
     
-    public Goal (String title, Date dueDate, String description, byte priority, byte level) {
+    public Goal (String title, String description, Date dueDate,  byte priority, byte level) {
         setTitle(title);
-        setDueDate(dueDate);
         setDescription(description);
+        setDueDate(dueDate);
         setPriority(priority);
         setLevel(level);
     }
@@ -53,17 +53,17 @@ public class Goal implements Serializable{
     private void setTitle(String title) {
         this.title = title;
     }
-    public Date getDate() {
-        return dueDate;
-    }
-    private void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
     public String getDescription() {
         return description;
     }
     private void setDescription(String description) {
         this.description = description;
+    }
+    public Date getDate() {
+        return dueDate;
+    }
+    private void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
     public byte getPriority() {
         return priority;
