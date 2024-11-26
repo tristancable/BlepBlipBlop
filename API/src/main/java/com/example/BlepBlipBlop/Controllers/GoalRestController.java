@@ -19,7 +19,7 @@ public class GoalRestController {
         User user = userJpaRepository.findByUsernameAndPassword(username, password);
         byte level = user.getLevel();
         ArrayList<Goal> goals = (ArrayList<Goal>) goalJpaRepository.findByLevelLessThanEqual(level);
-\        return goals;
+        return goals;
     }
     @RequestMapping(path="", method=RequestMethod.POST)
     public void createGoal(@RequestBody Goal goal) {

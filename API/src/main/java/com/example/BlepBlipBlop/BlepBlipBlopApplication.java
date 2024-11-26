@@ -14,7 +14,7 @@ public class BlepBlipBlopApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:8081").allowedMethods("*");
+				registry.addMapping("/**").allowedOrigins("http://localhost:8081").allowedMethods("*").allowCredentials(true);
 			}
 		};
 	}
