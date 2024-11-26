@@ -150,11 +150,19 @@ export default {
                     password: this.password
                 });
 
-                console.log("Registration successful:", response.data);
-                alert("Registration successful! Please log in.");
+                if (response?.data === "User created") {
+                    console.log("Registration successful:", response.data);
+                    alert("Registration successful! Please log in.");
+                    this.$router.push('/login');
+                }
             } catch (error) {
                 console.error("Error during registration:", error.response || error);
-                this.errorMessage = error.response?.data?.message || "Registration failed. Please try again.";
+                if (error.response?.data === "Username taken") {
+                    this.errorMessage = "Username already taken.";
+                } else {
+                    this.errorMessage = error.response?.data || "Registration failed. Please try again.";
+                }
+                // this.errorMessage = error.response?.data?.message || "Registration failed. Please try again.";
             }
         },
     },

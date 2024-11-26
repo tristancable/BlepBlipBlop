@@ -19,8 +19,10 @@
                             <v-text-field v-model="password" label="Password" prepend-inner-icon="mdi-lock"
                                 type="password" outlined dense required></v-text-field>
 
+                            <div class="red--text">{{ errorMessage }}</div>
+
                             <!-- Login Button -->
-                            <v-btn color="primary" class="mt-4" block @click="loginUser">
+                            <v-btn type="submit" color="primary" class="mt-4" block>
                                 Login
                             </v-btn>
                         </v-form>
@@ -32,18 +34,41 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+
     name: 'LoginPage',
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            errorMessage: '',
         };
     },
     methods: {
-        loginUser() {
-            console.log("Logging in", this.username);
-            // Handle login logic here
+        async loginUser() {
+            if (!this.username.trim() || !this.password.trim) {
+                this.errorMessage = "Username and password are required.";
+                return;
+            }
+
+            try {
+                const response = await axios.post("http://localhost:8080/user", {
+                    username: this.username,
+                    password: this.password,
+                }, { withCredentials: true });
+
+                console.log("Login successful:", response.data);
+                alert("Login successful!");
+                // localStorage.setItem('authToken', response.data.token);
+                localStorage.setItem('loggedIn', true);
+                this.$router.push("/");
+                this.errorMessage = "";
+            } catch (error) {
+                console.error("Login failed:", error.response || error);
+                this.errorMessage = error.response?.data?.message || "Login failed. Please try again.";
+            }
         }
     }
 };
