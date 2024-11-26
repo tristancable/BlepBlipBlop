@@ -1,30 +1,24 @@
-import axios from 'axios';
+import axiosInstance from './path/to/your/axiosInstance';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080', // Adjust to match your backend's base URL
-  timeout: 10000, // Optional: Set a timeout
-  headers: {
-    'Content-Type': 'application/json', // Default headers
+export default {
+  name: 'YourComponent',
+  data() {
+    return {
+      data: null,
+    };
   },
-});
-
-// Add interceptors if needed
-axiosInstance.interceptors.request.use(
-  config => {
-    // Modify the request if needed (e.g., attach tokens)
-    return config;
+  methods: {
+    fetchData() {
+      axiosInstance.get('/endpoint') // Uses the baseURL defined in axiosInstance
+        .then(response => {
+          this.data = response.data;
+        })
+        .catch(error => {
+          console.error('There was an error!', error);
+        });
+    },
   },
-  error => {
-    return Promise.reject(error);
-  }
-);
-
-axiosInstance.interceptors.response.use(
-  response => response,
-  error => {
-    // Handle errors globally (optional)
-    return Promise.reject(error);
-  }
-);
-
-export default axiosInstance;
+  mounted() {
+    this.fetchData();
+  },
+};
