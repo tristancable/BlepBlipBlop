@@ -15,11 +15,18 @@ public class UserRestController {
 
     @RequestMapping(path="", method=RequestMethod.POST)
     public void createUser(@RequestBody User user) {
-        userJpaRepository.save(user);
+        if (userJpaRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword()) == null) {
+            userJpaRepository.save(user);
+        }
     }
     @RequestMapping(path="", method=RequestMethod.PUT)
     public void updateUser(@RequestBody User user) {
-        userJpaRepository.save(user);
+        User ogUser = userJpaRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        if (ogUser != null) {
+            // ogUser.setUsername(user.getUsername());
+            // ogUser.setPassword(user.getPassword());
+            userJpaRepository.save(user);
+        }    
     }
     @RequestMapping(path="/{id}", method=RequestMethod.DELETE)
     public void deleteUser(@PathVariable int id) {
