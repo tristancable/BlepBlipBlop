@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Calendar from '../views/Calendar.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Logout from '../views/LogoutView.vue'
 
 const routes = [
     {
@@ -14,17 +15,22 @@ const routes = [
         path: '/calendar',
         name: 'Calendar',
         component: Calendar,
-        meta: { title: 'Calendar'},
+        meta: { title: 'Calendar' },
     }, {
         path: '/login',
         name: 'Login',
         component: Login,
-        meta: { title: 'Login'},
+        meta: { title: 'Login' },
     }, {
         path: '/register',
         name: 'Register',
         component: Register,
-        meta: { title: 'Register'},
+        meta: { title: 'Register' },
+    }, {
+        path: '/logout',
+        name: 'Logout',
+        component: Logout,
+        meta: { title: 'Logout' },
     }
 ]
 

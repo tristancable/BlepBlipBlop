@@ -46,15 +46,21 @@ export default {
             errorMessage: '',
         };
     },
+    mounted() {
+        // Check if the user is already logged in
+        if (localStorage.getItem('loggedIn')) {
+            this.$router.push("/");  // Redirect to the home page if already logged in
+        }
+    },
     methods: {
         async loginUser() {
-            if (!this.username.trim() || !this.password.trim) {
+            if (!this.username.trim() || !this.password.trim()) {
                 this.errorMessage = "Username and password are required.";
                 return;
             }
 
             try {
-                const response = await axios.post("http://localhost:8080/user", {
+                const response = await axios.get("http://localhost:8080/user", {
                     username: this.username,
                     password: this.password,
                 }, { withCredentials: true });

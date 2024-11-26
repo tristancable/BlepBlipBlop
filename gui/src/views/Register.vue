@@ -121,39 +121,52 @@ export default {
     },
     methods: {
         async register() {
-            // console.log("Current Username before validation:", this.username);
-
+            // Check if username is provided
             if (!this.username || this.username.trim() === "") {
                 this.errorMessage = "Please input a username.";
                 return;
             }
 
-            if (this.password === this.confirmPassword) {
-                this.errorMessage = "";
-                try {
-                    await this.registerUser();
-                    this.$refs.form.reset();
-                    console.log("User successfully validated:", this.username);
-                } catch (error) {
-                    console.error(error);
-                    this.errorMessage = "An error occured. Please try again.";
-                }
-            } else {
+            // Check if both passwords are provided
+            if (!this.password || !this.confirmPassword) {
+                this.errorMessage = "Please input a password.";
+                return;
+            }
+
+            // Check if passwords match
+            if (this.password !== this.confirmPassword) {
                 this.errorMessage = "Passwords do not match.";
+                return;
+            }
+
+            // Clear any previous error messages
+            this.errorMessage = "";
+
+            try {
+                await this.registerUser();
+                this.$refs.form.reset();
+                console.log("User successfully validated:", this.username);
+            } catch (error) {
+                console.error(error);
+                this.errorMessage = "An error occurred. Please try again.";
             }
         },
-        registerUser() {
+        async registerUser() {
             try {
                 console.log("Registering user:", this.username);
-                const response = axios.post('http://localhost:8080/user', {
+                const response = await axios.post('http://localhost:8080/user', {
                     username: this.username,
                     password: this.password
-                });
+                })/* {
+                    withCredentials: true
+                })*//*.then(response => console.log(response)).catch(error => console.error(error))*/;
 
-                if (response?.data === "User created") {
+                if (response.data === "User created") {
                     console.log("Registration successful:", response.data);
                     alert("Registration successful! Please log in.");
                     this.$router.push('/login');
+                } else {
+                    this.errorMessage = "Registration failed. Please try again.";
                 }
             } catch (error) {
                 console.error("Error during registration:", error.response || error);
