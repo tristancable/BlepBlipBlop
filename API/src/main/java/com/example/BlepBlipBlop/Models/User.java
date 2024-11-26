@@ -33,19 +33,19 @@ public class User {
     public String getUsername() {
         return username;
     }
-    private void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
     public String getPassword() {
         return password;
     }
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     public byte getLevel() {
         return level;
     }
-    private void setLevel(byte level) {
+    public void setLevel(byte level) {
         this.level = level;
     }
 }
