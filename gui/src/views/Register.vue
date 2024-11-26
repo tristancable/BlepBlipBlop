@@ -145,7 +145,7 @@ export default {
         registerUser() {
             try {
                 console.log("Registering user:", this.username);
-                const response = await axios.post('http://localhost:8080/api/user', {
+                const response = axios.post('http://localhost:8080/user', {
                     username: this.username,
                     password: this.password
                 });
