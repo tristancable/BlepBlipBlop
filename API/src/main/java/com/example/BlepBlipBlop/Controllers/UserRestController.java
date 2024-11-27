@@ -64,4 +64,15 @@ public class UserRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User does not exist");
         }
     }
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+        // Clear the cookie
+        Cookie cookie = new Cookie("authToken", null);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok().body("Logout successful");
+    }
 }

@@ -14,9 +14,9 @@ public class GoalRestController {
     private  GoalJpaRepository goalJpaRepository;
         @Autowired
     private  UserJpaRepository userJpaRepository;
-    @RequestMapping(path="/{username}/{password}", method=RequestMethod.GET)
-    public ArrayList<Goal> getAllGoals(@PathVariable String username, @PathVariable String password) {
-        User user = userJpaRepository.findByUsername(username);
+    @RequestMapping(path="", method=RequestMethod.GET)
+    public ArrayList<Goal> getAllGoals(@RequestBody User passedUser) {
+        User user = userJpaRepository.findByUsername(passedUser.getUsername());
         byte level = user.getLevel();
         ArrayList<Goal> goals = (ArrayList<Goal>) goalJpaRepository.findByLevelLessThanEqual(level);
         return goals;
