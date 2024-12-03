@@ -22,7 +22,7 @@
                             <div class="red--text">{{ errorMessage }}</div>
 
                             <!-- Login Button -->
-                            <v-btn type="submit" color="primary" class="mt-4" block>
+                            <v-btn type="submit" color="#800203" class="mt-4" block>
                                 Login
                             </v-btn>
                         </v-form>
@@ -37,46 +37,49 @@
 import axios from "axios";
 
 export default {
-
     name: 'LoginPage',
     data() {
         return {
             username: '',
             password: '',
             errorMessage: '',
+            isLoading: false,
         };
-    },
-    mounted() {
-        // Check if the user is already logged in
-        if (localStorage.getItem('loggedIn')) {
-            this.$router.push("/");  // Redirect to the home page if already logged in
-        }
     },
     methods: {
         async loginUser() {
+            this.isLoading = true;
             if (!this.username.trim() || !this.password.trim()) {
                 this.errorMessage = "Username and password are required.";
+                this.isLoading = false;
                 return;
             }
 
             try {
-                const response = await axios.get("http://localhost:8080/user", {
+                const response = await axios.post("http://localhost:8080/user/login", {
                     username: this.username,
                     password: this.password,
-                }, { withCredentials: true });
+                }, {
+                    withCredentials: true
+                });
 
                 console.log("Login successful:", response.data);
                 alert("Login successful!");
-                // localStorage.setItem('authToken', response.data.token);
-                localStorage.setItem('loggedIn', true);
+                localStorage.setItem('authToken', true);
                 this.$router.push("/");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 100);
                 this.errorMessage = "";
             } catch (error) {
                 console.error("Login failed:", error.response || error);
                 this.errorMessage = error.response?.data?.message || "Login failed. Please try again.";
+            } finally {
+                this.isLoading = false;
             }
         }
     }
+
 };
 </script>
 
@@ -92,5 +95,9 @@ export default {
 .v-container {
     height: 90vh;
     padding: 0%;
+}
+
+.red--text {
+    color: red;
 }
 </style>

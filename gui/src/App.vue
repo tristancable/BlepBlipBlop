@@ -25,6 +25,7 @@ html {
   padding: 0;
   height: 100%;
   width: 100%;
+  background-color: black;
 }
 
 .v-application {
@@ -33,7 +34,6 @@ html {
 
 .v-main {
   height: 100%;
-  /* Ensure v-main takes full height */
   padding: 0;
   margin: 0;
 }

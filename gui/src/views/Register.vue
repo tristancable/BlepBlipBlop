@@ -1,32 +1,28 @@
 <template>
     <v-app>
-        <!-- Main Content -->
         <v-main>
             <v-container fluid class="d-flex align-center justify-center" style="height: 100vh;">
-                <!-- Register Card -->
                 <v-card class="elevation-12" max-width="400px" style="width: 100%;">
                     <v-card-title class="text-h5 text-center">
                         Register
                     </v-card-title>
                     <v-card-text>
                         <v-form ref="form" @submit.prevent="register">
-                            <!-- Username Field -->
                             <v-text-field v-model="username" label="Username" prepend-inner-icon="mdi-account"
                                 type="text" outlined dense required></v-text-field>
 
-                            <!-- Password Field -->
+                            <v-text-field v-model="level" label="Level" prepend-inner-icon="mdi-pound" type="text"
+                                outlined dense required></v-text-field>
+
                             <v-text-field v-model="password" label="Password" prepend-inner-icon="mdi-lock"
                                 type="password" outlined dense required></v-text-field>
 
-                            <!-- Confirm Password Field -->
                             <v-text-field v-model="confirmPassword" label="Confirm Password"
                                 prepend-inner-icon="mdi-lock" type="password" outlined dense required></v-text-field>
 
-                            <!-- Error Message -->
                             <div class="red--text">{{ errorMessage }}</div>
 
-                            <!-- Register Button -->
-                            <v-btn type="submit" color="primary" class="mt-4" block>
+                            <v-btn type="submit" color="#800203" class="mt-4" block>
                                 Register
                             </v-btn>
                         </v-form>
@@ -36,75 +32,6 @@
         </v-main>
     </v-app>
 </template>
-
-
-
-
-
-
-
-
-
-<!-- <template>
-    <v-app>
-      <v-main>
-        <v-container fluid fill-height>
-          <v-row justify="center" align="center">
-            <v-col cols="12" sm="8" md="4">
-              <v-card class="elevation-12">
-                <v-toolbar dark>
-                  <v-toolbar-title>
-                    {{ isRegister ? stateObj.register.name : stateObj.login.name }} Form
-                  </v-toolbar-title>
-                </v-toolbar>
-                <v-card-text>
-                  <form ref="form" @submit.prevent="isRegister ? register() : login()">
-                    <v-text-field
-                      v-model="username"
-                      name="username"
-                      label="Username"
-                      type="text"
-                      placeholder="username"
-                      required
-                    ></v-text-field>
-  
-                    <v-text-field
-                      v-model="password"
-                      name="password"
-                      label="Password"
-                      type="password"
-                      placeholder="password"
-                      required
-                    ></v-text-field>
-  
-                    <v-text-field
-                      v-if="isRegister"
-                      v-model="confirmPassword"
-                      name="confirmPassword"
-                      label="Confirm Password"
-                      type="password"
-                      placeholder="confirm password"
-                      required
-                    ></v-text-field>
-  
-                    <div class="red--text">{{ errorMessage }}</div>
-  
-                    <v-btn type="submit" class="mt-4" color="primary" value="log in">
-                      {{ isRegister ? stateObj.register.name : stateObj.login.name }}
-                    </v-btn>
-  
-                    <div class="grey--text mt-4" @click="isRegister = !isRegister">
-                      {{ toggleMessage }}
-                    </div>
-                  </form>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-main>
-    </v-app>
-  </template> -->
 
 <script>
 import axios from 'axios';
@@ -116,30 +43,35 @@ export default {
             username: "",
             password: "",
             confirmPassword: "",
+            level: "",
             errorMessage: "",
         };
     },
     methods: {
         async register() {
-            // Check if username is provided
             if (!this.username || this.username.trim() === "") {
                 this.errorMessage = "Please input a username.";
                 return;
             }
 
-            // Check if both passwords are provided
+            if (!this.level || this.level.trim() === "") {
+                this.errorMessage = "Please input a level.";
+                return;
+            } else if (this.level > 4 && this.level < 1) {
+                this.errorMessage = "Level must be between 1 and 4."
+                return;
+            }
+
             if (!this.password || !this.confirmPassword) {
                 this.errorMessage = "Please input a password.";
                 return;
             }
 
-            // Check if passwords match
             if (this.password !== this.confirmPassword) {
                 this.errorMessage = "Passwords do not match.";
                 return;
             }
 
-            // Clear any previous error messages
             this.errorMessage = "";
 
             try {
@@ -156,10 +88,9 @@ export default {
                 console.log("Registering user:", this.username);
                 const response = await axios.post('http://localhost:8080/user', {
                     username: this.username,
-                    password: this.password
-                })/* {
-                    withCredentials: true
-                })*//*.then(response => console.log(response)).catch(error => console.error(error))*/;
+                    password: this.password,
+                    level: this.level,
+                })
 
                 if (response.data === "User created") {
                     console.log("Registration successful:", response.data);
@@ -175,15 +106,11 @@ export default {
                 } else {
                     this.errorMessage = error.response?.data || "Registration failed. Please try again.";
                 }
-                // this.errorMessage = error.response?.data?.message || "Registration failed. Please try again.";
             }
         },
     },
 };
 </script>
-
-
-
 
 <style scoped>
 .v-container {
